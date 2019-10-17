@@ -26,6 +26,7 @@
 
 	p {
 		margin: 1em auto;
+		color: #43619c;
 	}
 
 	@media (min-width: 480px) {
@@ -39,11 +40,12 @@
 	<title>eBRPL Rollup</title>
 </svelte:head>
 
-<h1>Berhasil! Nice</h1>
+<h1>HELLO YOU! </h1>
 
 <figure>
 	<img alt='Borat' src='great-success.png'>
 	<figcaption>HIGH FIVE!</figcaption>
 </figure>
 
-<p><strong>Aplikasi Port Sampling di Bidang Kelautan & Perikanan</strong></p>
+<!--<p><strong>Aplikasi Port Sampling di Bidang Kelautan & Perikanan</strong></p>-->
+<p><strong>Then ******* ********* ******** ** *************</strong></p>

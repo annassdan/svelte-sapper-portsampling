@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "sapper dev",
+    "prod": "npm run build && npm start",
     "build": "sapper build --legacy",
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",

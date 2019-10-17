@@ -50,8 +50,8 @@
 
 <nav>
 	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>Tentang</a></li>
+		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>Beranda</a></li>
+		<li><a rel=prefetch class='{segment === "about" ? "selected" : ""}' href='about'>Tentang</a></li>
 
 	</ul>
 </nav>
