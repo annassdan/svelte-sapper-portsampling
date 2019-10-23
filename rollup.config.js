@@ -10,6 +10,7 @@ import pkg from './package.json';
 import sveltePreprocess from 'svelte-preprocess';
 import postcss from 'rollup-plugin-postcss';
 import alias from 'rollup-plugin-alias';
+import sass from 'node-sass';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -19,15 +20,36 @@ const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /
 const dedupe = importee => importee === 'svelte' || importee.startsWith('svelte/');
 
 /* konfigurasi penggunaan SCSS pada svelte*/
-// const preprocess = sveltePreprocess({ aliases: [], preserve: [] });
-const preprocess = sveltePreprocess({
-	scss: {
-		includePaths: ['src'],
-	},
-	postcss: {
-		plugins: [require('autoprefixer')],
-	},
-});
+const preprocess = sveltePreprocess({ aliases: [], preserve: [] });
+// const preprocess = sveltePreprocess({
+// 	scss: {
+// 		includePaths: ['src'],
+// 	},
+// 	postcss: {
+// 		plugins: [require('autoprefixer')],
+// 	},
+// });
+const preprocessorByHaris = {
+	style: ({ content, attributes }) => {
+		if (attributes.type !== 'text/scss') return;
+
+		return new Promise((fulfil, reject) => {
+			sass.render({
+				data: content,
+				includePaths: ['src'],
+				sourceMap: true,
+				outFile: 'x' // this is necessary, but is ignored
+			}, (err, result) => {
+				if (err) return reject(err);
+
+				fulfil({
+					code: result.css.toString(),
+					map: result.map.toString()
+				});
+			});
+		});
+	}
+};
 
 const aliases = () => ({
 	resolve: ['.svelte', '.js', '.scss', '.css'],
@@ -66,7 +88,7 @@ export default {
 				hydratable: true,
 				emitCss: true,
 				css: true,
-				preprocess
+				preprocess: preprocessorByHaris
 			}),
 			resolve({
 				browser: true,
@@ -113,7 +135,7 @@ export default {
 			svelte({
 				generate: 'ssr',
 				dev,
-				preprocess
+				preprocess: preprocessorByHaris
 			}),
 			resolve({
 				dedupe
