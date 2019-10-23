@@ -37,7 +37,7 @@
 </style>
 
 <svelte:head>
-	<title>eBRPL Rollup</title>
+	<title>Beranda</title>
 </svelte:head>
 
 <h1>HELLO YOU! </h1>
@@ -49,43 +49,12 @@
 
 <!--<p><strong>Aplikasi Port Sampling di Bidang Kelautan & Perikanan</strong></p>-->
 <p><strong>Then ******* ********* ******** ** *************</strong></p>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+dasdadad
