@@ -1,5 +1,13 @@
+<svelte:head>
+	<title>Beranda</title>
+</svelte:head>
+
+<script>
+
+</script>
+
 <style type="text/scss">
-	$green: green;
+    @import "../theme/smui-theme";
 
 	h1, figure, p {
 		text-align: center;
@@ -11,7 +19,7 @@
 		text-transform: uppercase;
 		font-weight: 700;
 		margin: 0 0 0.5em 0;
-		color: $green;
+		color: $mdc-theme-primary;
 	}
 
 	figure {
@@ -36,10 +44,6 @@
 	}
 </style>
 
-<svelte:head>
-	<title>Beranda</title>
-</svelte:head>
-
 <h1>HELLO YOU! </h1>
 
 <figure>
@@ -49,6 +53,8 @@
 
 <!--<p><strong>Aplikasi Port Sampling di Bidang Kelautan & Perikanan</strong></p>-->
 <p><strong>Then ******* ********* ******** ** *************</strong></p>
+
+<!--	<button on:click={ubah}>Change</button>-->
 <br><br>
 <br><br>
 <br><br>

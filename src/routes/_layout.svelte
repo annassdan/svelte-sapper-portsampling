@@ -1,22 +1,39 @@
-<script>
+<svelte:window on:resize={updateWindowSizeState} />
 
+<script>
 	import MyNav from "../components/MyNav.svelte";
 	import Drawer, {AppContent, Content, Header, Title, Subtitle, Scrim} from '@smui/drawer';
 	import Button, {Label} from '@smui/button';
 	import List, {Item, Text, Graphic, Separator, Subheader} from '@smui/list';
 	import H6 from '@smui/common/H6.svelte';
+	import { goto } from '@sapper/app';
+	import { onMount, tick, afterUpdate, beforeUpdate } from 'svelte';
+	import { NORMAL_WINDOW_MIN_WIDTH } from '../shared/utilities'
+	import mainState$, { detectedAsNormalScreenOnDesktop, toggledDrawer } from '../stores/main-state';
 
 	export let segment;
-
 	let active2 = 'Inbox';
 	let myDrawer2;
-	let myDrawer2Open = true;
+	const appName = 'Pendataan Port Sampling';
+
+
+
 
 	function setActive2(value) {
 		active2 = value;
 	}
 
-	const appName = 'Pendataan Port Sampling'
+
+
+	$: mainState$.toggledDrawer.update($detectedAsNormalScreenOnDesktop);
+	const updateWindowSizeState = () => mainState$.detectedAsNormalScreenOnDesktop.update(window.innerWidth >= NORMAL_WINDOW_MIN_WIDTH);
+	const go = (path) => goto(path);
+	const toggle = () => mainState$.toggledDrawer.update(!$toggledDrawer);
+	const updateComponentCorrectlyWhenFirstMount = () => mainState$.toggledDrawer.update(window.innerWidth >= NORMAL_WINDOW_MIN_WIDTH);
+
+
+	/* place here all lifecycle function */
+	onMount(updateWindowSizeState);
 </script>
 
 <style>
@@ -63,7 +80,7 @@
 
 <div class="drawer-container">
 	<!-- DRAWER -->
-	<Drawer variant="dismissible" bind:this={myDrawer2} bind:open={myDrawer2Open}>
+	<Drawer variant="dismissible"  bind:open={$toggledDrawer}>
 		<Header>
 			<Title>Super Mail</Title>
 			<Subtitle>It's the best fake mail app drawer.</Subtitle>
@@ -111,7 +128,13 @@
 
 	<AppContent >
 		<div class="app-content">
-			<Button on:click={()=> myDrawer2Open = !myDrawer2Open}><Label>Toggle Drawer</Label></Button>
+			<Button on:click={toggle}><Label>Toggle Drawer</Label></Button>
+			<Button on:click={()=> go('/about')}><Label>About</Label></Button>
+			<Button on:click={()=> go('/')}><Label>Home</Label></Button>
+
+			<!-- trigger men sinkronisasi state pada waktu pertama kali mount-->
+			<button style="display: none" on:click={updateComponentCorrectlyWhenFirstMount()}></button>
+
 			<main>
 				<slot></slot>
 			</main>
